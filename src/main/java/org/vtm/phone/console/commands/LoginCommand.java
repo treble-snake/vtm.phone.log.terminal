@@ -10,11 +10,8 @@ public class LoginCommand extends Command
     private boolean isLoginCorrect = false;
 
     @Override
-    public Command execute()
+    public void run()
     {
-        if(!validateArgs())
-            return this;
-
         String login = arguments.get(0);
         String password = arguments.get(1);
 
@@ -23,11 +20,10 @@ public class LoginCommand extends Command
         output = isLoginCorrect ?
                 "Welcome, " + LOGIN + "!" :
                 "Wrong login data.";
-        return this;
     }
 
     @Override
-    public boolean needsLogin()
+    public boolean needsAuthentication()
     {
         return false;
     }

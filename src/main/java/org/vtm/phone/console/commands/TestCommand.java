@@ -5,10 +5,8 @@ public class TestCommand extends Command
     public static final String ALIAS = "test";
 
     @Override
-    public Command execute()
+    public void run()
     {
-        validateArgs();
         output = "some test";
-        return this;
     }
 }

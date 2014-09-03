@@ -8,6 +8,9 @@ import java.util.Scanner;
 
 public class PhoneLogTerminal
 {
+    private static final String WELCOME_MSG = "Welcome! Please log in or use 'help' command for more information.";
+    protected static final String INPUT_MARKER = "> ";
+
     private boolean isLogged = false;
 
     public static void main(String[] args)
@@ -17,36 +20,36 @@ public class PhoneLogTerminal
 
     public void run()
     {
-        CommandFactory commandFactory = new CommandFactory();
         try
         {
             Command command;
-            Scanner console = new Scanner(System.in);
             Scanner lineInput;
+            Scanner console = new Scanner(System.in);
+            CommandFactory commandFactory = new CommandFactory();
+
             do
             {
 
                 if(!isLogged)
-                    System.out.println("Welcome! Please log in or use 'help' command for more information.");
+                    System.out.println(WELCOME_MSG);
 
-                System.out.print("> ");
+                System.out.print(INPUT_MARKER);
+
                 lineInput = new Scanner(console.nextLine());
+                command = commandFactory.get(lineInput.next());
 
-                String alias = lineInput.next();
-                command = commandFactory.get(alias);
-
-                if(!isLogged && command.needsLogin())
+                if(!isLogged && command.needsAuthentication())
                     continue;
 
                 while (lineInput.hasNext()) {
                     command.appendArg(lineInput.next());
                 }
 
-                if(command instanceof LoginCommand)
-                    isLogged = ((LoginCommand)command).isCorrectLoginData();
-
                 System.out.println(command.execute().getOutput());
                 System.out.println();
+
+                if(command instanceof LoginCommand)
+                    isLogged = ((LoginCommand)command).isCorrectLoginData();
 
             } while (!(command instanceof ExitCommand));
         }

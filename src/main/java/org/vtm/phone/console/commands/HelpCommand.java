@@ -5,7 +5,7 @@ public class HelpCommand extends Command
     public static final String ALIAS = "help";
 
     @Override
-    public Command execute()
+    public void run()
     {
         output = "Available commands:\n" +
                 "login [username] [password] -- for logging in\n" +
@@ -14,11 +14,10 @@ public class HelpCommand extends Command
                 "list -- will show list of all phones\n" +
                 "help -- this command\n" +
                 "exit -- will close the terminal\n";
-        return this;
     }
 
     @Override
-    public boolean needsLogin()
+    public boolean needsAuthentication()
     {
         return false;
     }

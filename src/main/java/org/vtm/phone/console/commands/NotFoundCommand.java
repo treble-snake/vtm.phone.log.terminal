@@ -4,7 +4,6 @@ import org.apache.commons.lang3.StringUtils;
 
 public class NotFoundCommand extends Command
 {
-
     public NotFoundCommand()
     {
     }
@@ -15,10 +14,9 @@ public class NotFoundCommand extends Command
     }
 
     @Override
-    public Command execute()
+    public void run()
     {
         output = "Command not found. Reason: " +
                 (StringUtils.isBlank(output) ? "Unknown" : output);
-        return this;
     }
 }

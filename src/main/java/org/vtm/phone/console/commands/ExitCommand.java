@@ -5,14 +5,13 @@ public class ExitCommand extends Command
     public static final String ALIAS = "exit";
 
     @Override
-    public Command execute()
+    public void run()
     {
         output = "Good bye!";
-        return this;
     }
 
     @Override
-    public boolean needsLogin()
+    public boolean needsAuthentication()
     {
         return false;
     }
