@@ -14,6 +14,9 @@ public class CommandFactory
         commands.put(ExitCommand.ALIAS, ExitCommand.class);
         commands.put(HelpCommand.ALIAS, HelpCommand.class);
         commands.put(TestCommand.ALIAS, TestCommand.class);
+        commands.put(LogCommand.ALIAS, LogCommand.class);
+        commands.put(StationCommand.ALIAS, StationCommand.class);
+        commands.put(FindCommand.ALIAS, FindCommand.class);
     }
 
     public Command get(String alias)
