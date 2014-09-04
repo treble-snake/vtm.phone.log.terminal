@@ -23,7 +23,7 @@ public class StationCommand extends Command
                 showAll();
                 break;
             default:
-                findByAddress();
+                find();
                 break;
         }
     }
@@ -33,7 +33,7 @@ public class StationCommand extends Command
         output = StringUtils.join(getEntries(getFile()), "\n");
     }
 
-    private void findByAddress() throws CommandException
+    private void find() throws CommandException
     {
         final String needle = StringUtils.join(arguments, " ");
         List<String> result = new LinkedList<>(getEntries(getFile()));
