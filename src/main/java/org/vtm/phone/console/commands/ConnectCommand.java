@@ -1,8 +1,8 @@
 package org.vtm.phone.console.commands;
 
-public class LoginCommand extends Command
+public class ConnectCommand extends Command
 {
-    public static final String ALIAS = "login";
+    public static final String ALIAS = "connect";
 
     private static final String LOGIN = "jack";
     private static final String PASSWORD = "ass";
@@ -34,7 +34,7 @@ public class LoginCommand extends Command
     }
 
     @Override
-    public int getExpectedArgsQty()
+    public int getMinimumArgsQty()
     {
         return 2;
     }

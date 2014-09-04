@@ -37,7 +37,7 @@ public class LogCommand extends Command
     }
 
     @Override
-    public int getExpectedArgsQty()
+    public int getMinimumArgsQty()
     {
         return 1;
     }

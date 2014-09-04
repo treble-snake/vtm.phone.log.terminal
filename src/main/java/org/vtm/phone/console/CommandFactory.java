@@ -10,7 +10,7 @@ public class CommandFactory
     private static final Map<String, Class<? extends Command>> commands = new HashMap<>();
     static
     {
-        commands.put(LoginCommand.ALIAS, LoginCommand.class);
+        commands.put(ConnectCommand.ALIAS, ConnectCommand.class);
         commands.put(ExitCommand.ALIAS, ExitCommand.class);
         commands.put(HelpCommand.ALIAS, HelpCommand.class);
         commands.put(TestCommand.ALIAS, TestCommand.class);

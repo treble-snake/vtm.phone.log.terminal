@@ -4,8 +4,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.vtm.phone.console.commands.exception.CommandException;
 
-import java.io.FileInputStream;
-import java.net.URL;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -30,17 +29,14 @@ public abstract class Command
         return this;
     }
 
-    protected abstract void run() throws CommandException;
-
-    public int getExpectedArgsQty()
+    public int getMinimumArgsQty()
     {
         return 0;
     }
 
-    // TODO temp false
     public boolean needsAuthentication()
     {
-        return false;
+        return true;
     }
 
     public void appendArg(String arg)
@@ -51,7 +47,7 @@ public abstract class Command
 
     protected void validate() throws CommandException
     {
-        if(arguments.size() < getExpectedArgsQty())
+        if(arguments.size() < getMinimumArgsQty())
             throw new CommandException("Not enough arguments.");
     }
 
@@ -62,18 +58,19 @@ public abstract class Command
 
     protected List<String> getEntries(String file) throws CommandException
     {
-        URL resource = this.getClass().getClassLoader().getResource(file);
-        if(resource == null)
+        InputStream stream = this.getClass().getResourceAsStream(file);
+        if(stream == null)
             throw new CommandException("File not found.");
 
         try
         {
-            String stationsListText = IOUtils.toString(new FileInputStream(resource.getPath()));
-            return Arrays.asList(stationsListText.split("\\n"));
+            return Arrays.asList(IOUtils.toString(stream).split("\\n"));
         }
         catch (java.io.IOException e)
         {
             throw new CommandException("Could not read file.");
         }
     }
+
+    protected abstract void run() throws CommandException;
 }

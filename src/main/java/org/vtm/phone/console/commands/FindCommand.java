@@ -15,6 +15,7 @@ import java.util.List;
 public class FindCommand extends Command
 {
     public static final String ALIAS = "find";
+    protected static final char DATE_TIME_SEPARATOR = '/';
 
     @Override
     protected void run() throws CommandException
@@ -24,10 +25,10 @@ public class FindCommand extends Command
             final List<String> result = new LinkedList<>();
             final String id = arguments.get(0);
             final Date from = arguments.size() > 1 ?
-                    DateUtils.parseDate(arguments.get(1).replace('.', ' '), LogsGenerator.DATE_FORMAT) :
+                    DateUtils.parseDate(arguments.get(1).replace(DATE_TIME_SEPARATOR, ' '), LogsGenerator.DATE_FORMAT) :
                     null;
             final Date to = arguments.size() > 2 ?
-                    DateUtils.parseDate(arguments.get(2).replace('.', ' '), LogsGenerator.DATE_FORMAT) :
+                    DateUtils.parseDate(arguments.get(2).replace(DATE_TIME_SEPARATOR, ' '), LogsGenerator.DATE_FORMAT) :
                     null;
 
             for (int i = 0; i < 41; i++)
